@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">StatusBarUtil</string>
+    <string name="switch_mode">Switch Light or Dark Mode</string>
+    <string name="use_in_fragment">Use in Fragment</string>
+    <string name="set_gradient">Set Gradient</string>
+    <string name="set_translucent">Set Transparent</string>
+    <string name="set_color">Set Color</string>
+</resources>
