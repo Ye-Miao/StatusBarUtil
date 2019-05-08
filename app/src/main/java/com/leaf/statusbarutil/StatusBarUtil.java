@@ -1,5 +1,6 @@
 package com.leaf.statusbarutil;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
@@ -25,24 +26,41 @@ public class StatusBarUtil {
     /**
      * 设置状态栏颜色
      *
-     * @param window   当前界面的window
+     * @param activity 当前界面
      * @param color    状态栏颜色值
-     * @param alpha    状态栏透明度
-     * @param isExtend 是否延伸到顶部
      */
-    public static void setColor(Window window, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha, Boolean isExtend) {
+    public static void setColor(Activity activity, @ColorInt int color) {
+        setColor(activity.getWindow(), color, DEFAULT_ALPHA);
+    }
+
+    /**
+     * 设置纯色状态栏（自定义颜色，alpha）
+     *
+     * @param activity
+     * @param color
+     * @param alpha
+     */
+    public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
+        setColor(activity.getWindow(), color, alpha);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param window 当前界面的window
+     * @param color  状态栏颜色值
+     * @param alpha  状态栏透明度
+     */
+    private static void setColor(Window window, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(cipherColor(color, alpha));
-
-            //判断是否将控件延伸到顶部状态栏
-            if (isExtend) {
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            }
+            //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             setTranslucentView((ViewGroup) window.getDecorView(), color, alpha);
+            //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
     }
 
@@ -65,10 +83,10 @@ public class StatusBarUtil {
         green = (int) (green * a + 0.5);
         blue = (int) (blue * a + 0.5);
         return 0xff << 24 | red << 16 | green << 8 | blue;
-
     }
 
-    public static void setTranslucentView(ViewGroup viewGroup, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
+
+    private static void setTranslucentView(ViewGroup viewGroup, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int cipherColor = cipherColor(color, alpha);
             View translucentView = viewGroup.findViewById(android.R.id.custom);

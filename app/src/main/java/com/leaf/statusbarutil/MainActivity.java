@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        StatusBarUtil.setColor(this, AppUtils.getColor(R.color.colorAccent));
         //设置状态栏颜色
         Button btn = findViewById(R.id.btn);
         //设置状态栏透明
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         //设置状态栏模式（亮光 or 暗淡）
         Button btn4 = findViewById(R.id.btn4);
 
+
+//        StatusBarUtil.setColor(this, 0, 0, true);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
