@@ -1,9 +1,13 @@
 package com.leaf.statusbarutil;
 
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+
 
 /**
  * @author：created by leaf on 2019-05-07
@@ -12,11 +16,14 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(this, AppUtils.getColor(R.color.colorAccent));
+//        StatusBarUtil.setColor(this, AppUtils.getColor(R.color.colorAccent));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        StatusBarUtil.setGradientColor(this, toolbar);
         //设置状态栏颜色
         Button btn = findViewById(R.id.btn);
         //设置状态栏透明
@@ -29,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         Button btn4 = findViewById(R.id.btn4);
 
 
-//        StatusBarUtil.setColor(this, 0, 0, true);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

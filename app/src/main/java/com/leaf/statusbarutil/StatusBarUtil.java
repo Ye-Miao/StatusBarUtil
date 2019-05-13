@@ -3,6 +3,7 @@ package com.leaf.statusbarutil;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
@@ -36,9 +37,9 @@ public class StatusBarUtil {
     /**
      * 设置纯色状态栏（自定义颜色，alpha）
      *
-     * @param activity
-     * @param color
-     * @param alpha
+     * @param activity 当前界面
+     * @param color    状态栏颜色值
+     * @param alpha    状态栏透明度
      */
     public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
         setColor(activity.getWindow(), color, alpha);
@@ -56,20 +57,70 @@ public class StatusBarUtil {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(cipherColor(color, alpha));
-            //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             setTranslucentView((ViewGroup) window.getDecorView(), color, alpha);
-            //window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
     }
+
+    /**
+     * 设置状态栏渐变颜色
+     *
+     * @param activity 当前界面
+     */
+    public static void setGradientColor(Activity activity, View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().setStatusBarColor(cipherColor(DEFAULT_COLOR, DEFAULT_ALPHA));
+            setTransparentForWindow(activity);
+            setPaddingTop(activity, view);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            setTranslucentView((ViewGroup) activity.getWindow().getDecorView(), StatusBarUtil.DEFAULT_COLOR, DEFAULT_ALPHA);
+            setPaddingTop(activity, view);
+        }
+    }
+
+
+    /**
+     * 设置透明
+     */
+    public static void setTransparentForWindow(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            activity.getWindow()
+                    .getDecorView()
+                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow()
+                    .setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
+    /**
+     * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
+     *
+     * @param context 当前Context
+     * @param view    需要增高的View
+     */
+    private static void setPaddingTop(Context context, View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ViewGroup.LayoutParams lp = view.getLayoutParams();
+            if (lp != null && lp.height > 0) {
+                lp.height += getStatusBarHeight(context);
+            }
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
+                    view.getPaddingRight(), view.getPaddingBottom());
+        }
+    }
+
 
     /**
      * 计算alpha色值
      *
      * @param color 状态栏颜色值
      * @param alpha 状态栏透明度
-     * @return
      */
     private static int cipherColor(@ColorInt int color, int alpha) {
         if (alpha == 0) {
