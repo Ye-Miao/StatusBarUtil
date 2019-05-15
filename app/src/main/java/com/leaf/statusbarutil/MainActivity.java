@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 //        StatusBarUtil.setColor(this, AppUtils.getColor(R.color.colorAccent));
         Toolbar toolbar = findViewById(R.id.toolbar);
         StatusBarUtil.setGradientColor(this, toolbar);
+        StatusBarUtil.setDarkMode(this);
         //设置状态栏颜色
         Button btn = findViewById(R.id.btn);
         //设置状态栏透明
