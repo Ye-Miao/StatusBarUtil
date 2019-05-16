@@ -3,14 +3,12 @@ package com.leaf.statusbarutil;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,7 +27,6 @@ public class StatusBarUtil {
 
     private static final int DEFAULT_COLOR = 0;
     private static final int DEFAULT_ALPHA = 0;
-
 
     /**
      * 设置状态栏颜色
@@ -103,18 +100,17 @@ public class StatusBarUtil {
 
     /**
      * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
-     *
      * @param context 当前Context
      * @param view    需要增高的View
      */
-    private static void setPaddingTop(Context context, View view) {
+    public static void setPaddingTop(Context context, View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
-            if (lp != null && lp.height > 0) {
+            if (lp != null && lp.height > 0 && view.getPaddingTop() == 0) {
                 lp.height += getStatusBarHeight(context);
+                view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
+                        view.getPaddingRight(), view.getPaddingBottom());
             }
-            view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
-                    view.getPaddingRight(), view.getPaddingBottom());
         }
     }
 
@@ -290,14 +286,8 @@ public class StatusBarUtil {
      * @param context 当前Context
      */
     private static int getStatusBarHeight(Context context) {
-        int result = 24;
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        } else {
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, result, Resources.getSystem().getDisplayMetrics());
-        }
-        return result;
+        return context.getResources().getDimensionPixelSize(resourceId);
     }
 }

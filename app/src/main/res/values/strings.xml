@@ -5,4 +5,6 @@
     <string name="set_gradient">Set Gradient</string>
     <string name="set_translucent">Set Transparent</string>
     <string name="set_color">Set Color</string>
+    <string name="set_light_mode">Set Light Mode</string>
+    <string name="set_dark_mode">Set Dark Mode</string>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/bottom_main"
+        android:background="@color/silver"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/silver"
+        app:itemIconTint="@drawable/selector_item_color"
+        app:itemTextColor="@drawable/selector_item_color"
+        app:menu="@menu/menu_navigation"
+        />
+</RelativeLayout>

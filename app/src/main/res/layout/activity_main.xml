@@ -6,27 +6,20 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_color"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name"
-            app:titleTextColor="@color/white"/>
-
-    </android.support.design.widget.AppBarLayout>
-
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/start_blue"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="48dp"
         android:orientation="vertical">
 
         <Button
@@ -84,7 +77,19 @@
             android:layout_marginBottom="20dp"
             android:background="@color/silver"
             android:padding="10dp"
-            android:text="@string/switch_mode"
+            android:text="@string/set_light_mode"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@color/silver"
+            android:padding="10dp"
+            android:text="@string/set_dark_mode"
             android:textAllCaps="false"
             android:textColor="@color/black"
             tools:ignore="MissingConstraints"/>
