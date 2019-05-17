@@ -267,6 +267,7 @@ public class StatusBarUtil {
                 translucentView.setBackgroundColor(cipherColor);
             }
         }
+
     }
 
     /**
