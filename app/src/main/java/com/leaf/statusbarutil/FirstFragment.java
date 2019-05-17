@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 /**
  * @author：created by leaf on 2019-05-07
@@ -29,8 +28,6 @@ public class FirstFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView imageView = view.findViewById(R.id.image1);
-        StatusBarUtil.setTransparentForWindow(getActivity());
-        StatusBarUtil.setPaddingTop(getActivity(), imageView);
+
     }
 }

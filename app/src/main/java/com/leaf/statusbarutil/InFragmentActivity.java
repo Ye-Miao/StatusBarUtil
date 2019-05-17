@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,10 @@ public class InFragmentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.use_in_fragment);
 
+        FrameLayout frameLayout = findViewById(R.id.fl_content);
+        StatusBarUtil.setTransparentForWindow(this);
+        StatusBarUtil.setPaddingTop(this, frameLayout);
+
 
         mFragments = Arrays.asList(
                 FirstFragment.newInstance(),
@@ -35,7 +40,6 @@ public class InFragmentActivity extends BaseActivity {
                 SecondFragment.newInstance(2)
         );
 
-        switchFragmentIndex(0);
         BottomNavigationView bottomMain = findViewById(R.id.bottom_main);
         bottomMain.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -56,9 +60,10 @@ public class InFragmentActivity extends BaseActivity {
                     default:
                         break;
                 }
-                return false;
+                return true;
             }
         });
+        bottomMain.getMenu().getItem(0).setChecked(true);
 
     }
 

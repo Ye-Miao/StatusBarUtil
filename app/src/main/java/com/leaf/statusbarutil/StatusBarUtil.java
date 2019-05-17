@@ -28,6 +28,7 @@ public class StatusBarUtil {
     private static final int DEFAULT_COLOR = 0;
     private static final int DEFAULT_ALPHA = 0;
 
+
     /**
      * 设置状态栏颜色
      *

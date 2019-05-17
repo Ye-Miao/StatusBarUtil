@@ -48,17 +48,17 @@ public class SecondFragment extends Fragment {
 
         switch (position) {
             case 0:
-                StatusBarUtil.setColor(getActivity(),AppUtils.getColor(R.color.end_blue));
+                StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.end_blue));
                 textView.setText("Second fragment");
                 break;
             case 1:
-                StatusBarUtil.setColor(getActivity(),AppUtils.getColor(R.color.colorPrimaryDark));
+                StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.colorPrimaryDark));
                 textView.setText("Third fragment");
                 break;
             case 2:
-                StatusBarUtil.setColor(getActivity(),AppUtils.getColor(R.color.black));
+                StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.black));
                 textView.setText("Fourth fragment");
                 break;
