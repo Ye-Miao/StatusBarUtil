@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,7 @@ import java.util.Random;
  * Github地址：https://github.com/Ye-Miao
  * Desc: 主界面
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private Button btn;
@@ -56,6 +57,14 @@ public class MainActivity extends BaseActivity {
 
                 mToolbar.setBackgroundColor(mStartColor);
                 StatusBarUtil.setColor(MainActivity.this, mStartColor);
+            }
+        });
+
+        //TODO 设置透明
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TransparentActivity.class));
             }
         });
 
