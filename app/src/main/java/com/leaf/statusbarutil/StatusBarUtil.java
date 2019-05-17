@@ -25,18 +25,16 @@ import java.util.regex.Pattern;
  */
 public class StatusBarUtil {
 
-    private static final int DEFAULT_COLOR = 0;
     private static final int DEFAULT_ALPHA = 0;
 
-
     /**
-     * 设置状态栏颜色
+     * 设置状态栏颜色（自定义颜色)
      *
      * @param activity 当前界面
      * @param color    状态栏颜色值
      */
     public static void setColor(Activity activity, @ColorInt int color) {
-        setColor(activity.getWindow(), color, DEFAULT_ALPHA);
+        setColor(activity, color, DEFAULT_ALPHA);
     }
 
     /**
@@ -47,24 +45,14 @@ public class StatusBarUtil {
      * @param alpha    状态栏透明度
      */
     public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
-        setColor(activity.getWindow(), color, alpha);
-    }
-
-    /**
-     * 设置状态栏颜色
-     *
-     * @param window 当前界面的window
-     * @param color  状态栏颜色值
-     * @param alpha  状态栏透明度
-     */
-    private static void setColor(Window window, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(cipherColor(color, alpha));
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().setStatusBarColor(cipherColor(color, alpha));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            setTranslucentView((ViewGroup) window.getDecorView(), color, alpha);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            setTranslucentView((ViewGroup) activity.getWindow().getDecorView(), color, alpha);
+            setRootView(activity);
         }
     }
 
@@ -78,8 +66,8 @@ public class StatusBarUtil {
             setTransparentForWindow(activity);
             setPaddingTop(activity, view);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentView((ViewGroup) activity.getWindow().getDecorView(), StatusBarUtil.DEFAULT_COLOR, DEFAULT_ALPHA);
-            setPaddingTop(activity, view);
+            setTransparentForWindow(activity);
+//            setPaddingTop(activity, view);
         }
     }
 
@@ -101,6 +89,7 @@ public class StatusBarUtil {
 
     /**
      * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
+     *
      * @param context 当前Context
      * @param view    需要增高的View
      */
@@ -267,16 +256,29 @@ public class StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int cipherColor = cipherColor(color, alpha);
             View translucentView = viewGroup.findViewById(android.R.id.custom);
-            if (translucentView == null) {
-                if (cipherColor != 0) {
-                    translucentView = new View(viewGroup.getContext());
-                    translucentView.setId(android.R.id.custom);
-                    ViewGroup.LayoutParams params =
-                            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(viewGroup.getContext()));
-                    viewGroup.addView(translucentView, params);
-                }
-            } else {
+            if (translucentView == null && cipherColor != 0) {
+                translucentView = new View(viewGroup.getContext());
+                translucentView.setId(android.R.id.custom);
+                ViewGroup.LayoutParams params =
+                        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(viewGroup.getContext()));
+                viewGroup.addView(translucentView, params);
+            }
+            if (translucentView != null) {
                 translucentView.setBackgroundColor(cipherColor);
+            }
+        }
+    }
+
+    /**
+     * 设置根布局参数
+     */
+    private static void setRootView(Activity activity) {
+        ViewGroup parent = activity.findViewById(android.R.id.content);
+        for (int i = 0, count = parent.getChildCount(); i < count; i++) {
+            View childView = parent.getChildAt(i);
+            if (childView instanceof ViewGroup) {
+                childView.setFitsSystemWindows(true);
+                ((ViewGroup) childView).setClipToPadding(true);
             }
         }
     }

@@ -36,9 +36,9 @@ public class TransparentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isChanged = !isChanged;
                 if (isChanged) {
-                    relativeLayout.setBackground(AppUtils.getDrawable(R.drawable.photo5));
-                } else {
                     relativeLayout.setBackground(AppUtils.getDrawable(R.drawable.photo6));
+                } else {
+                    relativeLayout.setBackground(AppUtils.getDrawable(R.drawable.photo5));
                 }
             }
         });
