@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -52,23 +53,56 @@ public class StatusBarUtil {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             setTranslucentView((ViewGroup) activity.getWindow().getDecorView(), color, alpha);
-            setRootView(activity);
+            setRootView(activity, true);
         }
     }
 
     /**
-     * 设置状态栏渐变颜色
+     * 设置状态栏渐变颜色（Android 5.0版本及以上有效）
      *
      * @param activity 当前界面
+     * @param view
      */
     public static void setGradientColor(Activity activity, View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setTransparentForWindow(activity);
-            setPaddingTop(activity, view);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTransparentForWindow(activity);
-//            setPaddingTop(activity, view);
+        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+        View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
+        if (fakeStatusBarView != null) {
+            decorView.removeView(fakeStatusBarView);
         }
+        setRootView(activity, false);
+        setTransparentForWindow(activity);
+        setPaddingTop(activity, view);
+    }
+
+    /**
+     * 设置状态栏渐变颜色（Android4.4版本）
+     *
+     * @param activity
+     * @param resId
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static void setGradientColor(Activity activity, int resId) {
+        setTransparentForWindow(activity);
+        //获取顶级视图
+        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+        //获取顶部的StatusBarView,自定义id
+        View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
+        if (fakeStatusBarView != null) {
+            if (fakeStatusBarView.getVisibility() == View.GONE) {
+                fakeStatusBarView.setVisibility(View.VISIBLE);
+            }
+            //设置顶层颜色
+            fakeStatusBarView.setBackgroundResource(resId);
+        } else {
+            //上述不符合，则创建一个View添加到顶级视图中
+            View statusBarView = new View(activity);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
+            statusBarView.setLayoutParams(params);
+            fakeStatusBarView.setBackgroundResource(resId);
+            statusBarView.setId(android.R.id.custom);
+            decorView.addView(statusBarView);
+        }
+        setRootView(activity, true);
     }
 
 
@@ -273,13 +307,13 @@ public class StatusBarUtil {
     /**
      * 设置根布局参数
      */
-    private static void setRootView(Activity activity) {
+    private static void setRootView(Activity activity, boolean fitSystemWindows) {
         ViewGroup parent = activity.findViewById(android.R.id.content);
         for (int i = 0, count = parent.getChildCount(); i < count; i++) {
             View childView = parent.getChildAt(i);
             if (childView instanceof ViewGroup) {
-                childView.setFitsSystemWindows(true);
-                ((ViewGroup) childView).setClipToPadding(true);
+                childView.setFitsSystemWindows(fitSystemWindows);
+                ((ViewGroup) childView).setClipToPadding(fitSystemWindows);
             }
         }
     }

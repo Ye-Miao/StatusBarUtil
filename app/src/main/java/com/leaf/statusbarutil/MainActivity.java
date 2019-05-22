@@ -2,7 +2,6 @@ package com.leaf.statusbarutil;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,12 +20,6 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private Button btn;
-    private Button btn1;
-    private Button btn2;
-    private Button btn3;
-    private Button btn4;
-    private Button btn5;
 
     private int mStartColor;
     private int mEndColor;
@@ -37,16 +30,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mToolbar = findViewById(R.id.toolbar);
-        StatusBarUtil.setColor(MainActivity.this, AppUtils.getColor(R.color.start_blue));
-        setSupportActionBar(mToolbar);
 
+        StatusBarUtil.setColor(this, AppUtils.getColor(R.color.start_blue));
 
-        btn = findViewById(R.id.btn);
-        btn1 = findViewById(R.id.btn1);
-        btn2 = findViewById(R.id.btn2);
-        btn3 = findViewById(R.id.btn3);
-        btn4 = findViewById(R.id.btn4);
-        btn5 = findViewById(R.id.btn5);
+        Button btn = findViewById(R.id.btn);
+        Button btn1 = findViewById(R.id.btn1);
+        Button btn2 = findViewById(R.id.btn2);
+        Button btn3 = findViewById(R.id.btn3);
+        Button btn4 = findViewById(R.id.btn4);
+        Button btn5 = findViewById(R.id.btn5);
 
         //TODO 设置状态栏颜色
         btn.setOnClickListener(new View.OnClickListener() {
@@ -72,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                mStartColor = 0xff000000 | random.nextInt(0xffffff);
-                mEndColor = 0xff000000 | random.nextInt(0xffffff);
-                int[] colors = {mStartColor, mEndColor};
-                GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-
-                mToolbar.setBackground(gradientDrawable);
-                StatusBarUtil.setGradientColor(MainActivity.this, mToolbar);
+//                Random random = new Random();
+//                mStartColor = 0xff000000 | random.nextInt(0xffffff);
+//                mEndColor = 0xff000000 | random.nextInt(0xffffff);
+//                int[] colors = {mStartColor, mEndColor};
+//                GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+//
+//                mToolbar.setBackground(gradientDrawable);
+//                StatusBarUtil.setGradientColor(MainActivity.this, mToolbar);
+                StatusBarUtil.setGradientColor(MainActivity.this, R.drawable.gradient_color);
             }
         });
 
@@ -91,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //设置状态栏模式（亮光）
+        //TODO 设置状态栏模式（亮光）
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
