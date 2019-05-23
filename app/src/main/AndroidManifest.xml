@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".InFragmentActivity"/>
         <activity android:name=".TransparentActivity"/>
+        <activity android:name=".ColorActivity"/>
+        <activity android:name=".GradientActivity"/>
     </application>
 
 </manifest>

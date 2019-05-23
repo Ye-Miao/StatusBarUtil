@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"></img></p>
+<p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"/></p>
 
 A status bar adaptation scheme for Android4.4-10.0 models that provides modified color, gradient, and immersive experience
 

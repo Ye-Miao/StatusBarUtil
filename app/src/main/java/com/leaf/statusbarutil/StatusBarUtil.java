@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
@@ -31,7 +32,7 @@ public class StatusBarUtil {
     /**
      * 设置状态栏颜色（自定义颜色)
      *
-     * @param activity 当前界面
+     * @param activity 目标activity
      * @param color    状态栏颜色值
      */
     public static void setColor(Activity activity, @ColorInt int color) {
@@ -41,7 +42,7 @@ public class StatusBarUtil {
     /**
      * 设置纯色状态栏（自定义颜色，alpha）
      *
-     * @param activity 当前界面
+     * @param activity 目标activity
      * @param color    状态栏颜色值
      * @param alpha    状态栏透明度
      */
@@ -59,8 +60,9 @@ public class StatusBarUtil {
 
     /**
      * 设置状态栏渐变颜色（Android 5.0版本及以上有效）
+     * 无先后顺序调用限制，放心使用
      *
-     * @param activity 当前界面
+     * @param activity 目标界面
      * @param view
      */
     public static void setGradientColor(Activity activity, View view) {
@@ -75,13 +77,15 @@ public class StatusBarUtil {
     }
 
     /**
-     * 设置状态栏渐变颜色（Android4.4版本）
+     * 设置状态栏渐变颜色（适用于Android4.4版本）
+     * 如果是初次使用setGradientColor()，则可以直接调用5.0版本方法
+     * 如果是先使用setColor()方法，则需要调用此方法
      *
      * @param activity
-     * @param resId
+     * @param drawable
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public static void setGradientColor(Activity activity, int resId) {
+    public static void setGradientColor(Activity activity, Drawable drawable) {
         setTransparentForWindow(activity);
         //获取顶级视图
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
@@ -92,22 +96,24 @@ public class StatusBarUtil {
                 fakeStatusBarView.setVisibility(View.VISIBLE);
             }
             //设置顶层颜色
-            fakeStatusBarView.setBackgroundResource(resId);
+            fakeStatusBarView.setBackground(drawable);
         } else {
             //上述不符合，则创建一个View添加到顶级视图中
-            View statusBarView = new View(activity);
+            fakeStatusBarView = new View(activity);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
-            statusBarView.setLayoutParams(params);
-            fakeStatusBarView.setBackgroundResource(resId);
-            statusBarView.setId(android.R.id.custom);
-            decorView.addView(statusBarView);
+            fakeStatusBarView.setLayoutParams(params);
+            fakeStatusBarView.setBackground(drawable);
+            fakeStatusBarView.setId(android.R.id.custom);
+            decorView.addView(fakeStatusBarView);
         }
-        setRootView(activity, true);
+        setRootView(activity, false);
     }
 
 
     /**
      * 设置透明状态栏
+     *
+     * @param activity 目标界面
      */
     public static void setTransparentForWindow(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -124,7 +130,7 @@ public class StatusBarUtil {
     /**
      * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
      *
-     * @param context 当前Context
+     * @param context 目标Context
      * @param view    需要增高的View
      */
     public static void setPaddingTop(Context context, View view) {
@@ -142,7 +148,7 @@ public class StatusBarUtil {
     /**
      * 设置状态栏darkMode,字体颜色及icon变黑(目前支持MIUI6以上,Flyme4以上,Android M以上)
      *
-     * @param activity 当前activity
+     * @param activity 目标activity
      */
     public static void setDarkMode(Activity activity) {
         darkMode(activity.getWindow(), true);
@@ -151,7 +157,7 @@ public class StatusBarUtil {
     /**
      * 设置状态栏darkMode,字体颜色及icon变亮(目前支持MIUI6以上,Flyme4以上,Android M以上)
      *
-     * @param activity 当前activity
+     * @param activity 目标activity
      */
     public static void setLightMode(Activity activity) {
         darkMode(activity.getWindow(), false);
@@ -171,6 +177,9 @@ public class StatusBarUtil {
 
     /**
      * android 6.0设置字体颜色
+     *
+     * @param window 目标window
+     * @param dark   亮色 or 暗色
      */
     @RequiresApi(Build.VERSION_CODES.M)
     private static void darkModeForM(Window window, boolean dark) {
@@ -188,7 +197,7 @@ public class StatusBarUtil {
      * 设置MIUI6+的状态栏的darkMode,darkMode时候字体颜色及icon
      * http://dev.xiaomi.com/doc/p=4769/
      *
-     * @param window 当前window
+     * @param window 目标window
      * @param dark   亮色 or 暗色
      */
     private static void setModeForMIUI6(Window window, boolean dark) {
@@ -209,7 +218,7 @@ public class StatusBarUtil {
      * 设置Flyme4+的状态栏的darkMode,darkMode时候字体颜色及icon
      * http://open-wiki.flyme.cn/index.php?title=Flyme%E7%B3%BB%E7%BB%9FAPI
      *
-     * @param window 当前window
+     * @param window 目标window
      * @param dark   亮色 or 暗色
      */
     private static void setModeForFlyme4(Window window, boolean dark) {
@@ -282,7 +291,7 @@ public class StatusBarUtil {
     /**
      * 创建透明View
      *
-     * @param viewGroup 当前视图
+     * @param viewGroup 目标视图
      * @param color     状态栏颜色值
      * @param alpha     状态栏透明度
      */
@@ -306,6 +315,9 @@ public class StatusBarUtil {
 
     /**
      * 设置根布局参数
+     *
+     * @param activity         目标activity
+     * @param fitSystemWindows 是否预留toolbar的高度
      */
     private static void setRootView(Activity activity, boolean fitSystemWindows) {
         ViewGroup parent = activity.findViewById(android.R.id.content);
@@ -321,7 +333,7 @@ public class StatusBarUtil {
     /**
      * 获取状态栏高度
      *
-     * @param context 当前Context
+     * @param context 目标Context
      */
     private static int getStatusBarHeight(Context context) {
         // 获得状态栏高度

@@ -50,26 +50,27 @@ public class SecondFragment extends Fragment {
         TextView textView = view.findViewById(R.id.txt);
         LinearLayout container = view.findViewById(R.id.container);
 
+        StatusBarUtil.setTransparentForWindow(getActivity());
         switch (position) {
             case 0:
                 StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.end_blue));
 
-                container.setBackground(AppUtils.getDrawable(R.drawable.photo2));
+                container.setBackground(AppUtils.getDrawable(R.mipmap.photo2));
                 textView.setText("Second fragment");
                 break;
             case 1:
                 StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.colorPrimaryDark));
 
-                container.setBackground(AppUtils.getDrawable(R.drawable.photo3));
+                container.setBackground(AppUtils.getDrawable(R.mipmap.photo3));
                 textView.setText("Third fragment");
                 break;
             case 2:
                 StatusBarUtil.setPaddingTop(getActivity(), mToolbar);
                 mToolbar.setBackgroundColor(AppUtils.getColor(R.color.black));
 
-                container.setBackground(AppUtils.getDrawable(R.drawable.photo4));
+                container.setBackground(AppUtils.getDrawable(R.mipmap.photo4));
                 textView.setText("Fourth fragment");
                 break;
             default:

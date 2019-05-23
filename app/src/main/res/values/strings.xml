@@ -7,4 +7,6 @@
     <string name="set_color">Set Color</string>
     <string name="set_light_mode">Set Light Mode(Android6.0及以上有效)</string>
     <string name="set_dark_mode">Set Dark Mode(Android6.0及以上有效)</string>
+    <string name="set_gradient_21">Set Gradient(Android5.0及以上使用)</string>
+    <string name="set_gradient_19">Set Gradient(Android4.4使用)</string>
 </resources>

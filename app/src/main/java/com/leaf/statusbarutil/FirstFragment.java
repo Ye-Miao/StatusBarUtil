@@ -24,4 +24,10 @@ public class FirstFragment extends Fragment {
     public static FirstFragment newInstance() {
         return new FirstFragment();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        StatusBarUtil.setTransparentForWindow(getActivity());
+    }
 }

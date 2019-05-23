@@ -6,10 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
-
-import java.util.Random;
 
 
 /**
@@ -20,9 +17,6 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-
-    private int mStartColor;
-    private int mEndColor;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -41,66 +35,29 @@ public class MainActivity extends AppCompatActivity {
         Button btn5 = findViewById(R.id.btn5);
 
         //TODO 设置状态栏颜色
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Random random = new Random();
-                mStartColor = 0xff000000 | random.nextInt(0xffffff);
-
-                mToolbar.setBackgroundColor(mStartColor);
-                StatusBarUtil.setColor(MainActivity.this, mStartColor);
-            }
-        });
+        btn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ColorActivity.class)));
 
         //TODO 设置透明
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TransparentActivity.class));
-            }
-        });
+        btn1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TransparentActivity.class)));
 
         //TODO 设置状态栏渐变
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Random random = new Random();
-//                mStartColor = 0xff000000 | random.nextInt(0xffffff);
-//                mEndColor = 0xff000000 | random.nextInt(0xffffff);
-//                int[] colors = {mStartColor, mEndColor};
-//                GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-//
-//                mToolbar.setBackground(gradientDrawable);
-//                StatusBarUtil.setGradientColor(MainActivity.this, mToolbar);
-                StatusBarUtil.setGradientColor(MainActivity.this, R.drawable.gradient_color);
-            }
-        });
+        btn2.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, GradientActivity.class)));
 
         //TODO 在fragment中使用
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InFragmentActivity.class));
-            }
+        btn3.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, InFragmentActivity.class)));
+
+        //TODO 设置状态栏模式（亮光）仅在android6.0及以上有效
+        btn4.setOnClickListener(v -> {
+            StatusBarUtil.setColor(MainActivity.this, AppUtils.getColor(R.color.start_blue));
+            mToolbar.setBackgroundColor(AppUtils.getColor(R.color.start_blue));
+            StatusBarUtil.setLightMode(MainActivity.this);
         });
 
-        //TODO 设置状态栏模式（亮光）
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StatusBarUtil.setColor(MainActivity.this, AppUtils.getColor(R.color.start_blue));
-                mToolbar.setBackgroundColor(AppUtils.getColor(R.color.start_blue));
-                StatusBarUtil.setLightMode(MainActivity.this);
-            }
-        });
-        //TODO 设置状态栏模式（暗色）
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StatusBarUtil.setColor(MainActivity.this, AppUtils.getColor(R.color.end_blue));
-                mToolbar.setBackgroundColor(AppUtils.getColor(R.color.end_blue));
-                StatusBarUtil.setDarkMode(MainActivity.this);
-            }
+        //TODO 设置状态栏模式（暗色）仅在android6.。0及以上有效
+        btn5.setOnClickListener(v -> {
+            StatusBarUtil.setColor(MainActivity.this, AppUtils.getColor(R.color.end_blue));
+            mToolbar.setBackgroundColor(AppUtils.getColor(R.color.end_blue));
+            StatusBarUtil.setDarkMode(MainActivity.this);
         });
     }
 }

@@ -4,18 +4,10 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Looper;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 
 /**
  * @author：created by leaf on 2019-05-08
@@ -25,9 +17,13 @@ import android.support.v4.content.ContextCompat;
 public class AppUtils {
 
     private static Context mContext;
+    private static Thread mUiThread;
+
+    private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     public static void init(Context context) { //在Application中初始化
         mContext = context;
+        mUiThread = Thread.currentThread();
     }
 
     public static Context getAppContext() {
@@ -47,11 +43,11 @@ public class AppUtils {
     }
 
     public static Drawable getDrawable(int resId) {
-        return ContextCompat.getDrawable(mContext, resId);
+        return mContext.getResources().getDrawable(resId);
     }
 
     public static int getColor(int resId) {
-        return ContextCompat.getColor(mContext,resId);
+        return mContext.getResources().getColor(resId);
     }
 
     public static String getString(@StringRes int resId) {
@@ -62,4 +58,15 @@ public class AppUtils {
         return mContext.getResources().getStringArray(resId);
     }
 
+    public static boolean isUIThread() {
+        return Thread.currentThread() == mUiThread;
+    }
+
+    public static void runOnUI(Runnable r) {
+        sHandler.post(r);
+    }
+
+    public static void runOnUIDelayed(Runnable r, long delayMills) {
+        sHandler.postDelayed(r, delayMills);
+    }
 }

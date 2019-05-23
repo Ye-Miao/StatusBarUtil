@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -16,7 +15,6 @@ import android.widget.RelativeLayout;
  */
 public class TransparentActivity extends AppCompatActivity {
     private boolean isChanged;
-    private Button btn;
     private RelativeLayout relativeLayout;
 
 
@@ -28,18 +26,15 @@ public class TransparentActivity extends AppCompatActivity {
 
         StatusBarUtil.setTransparentForWindow(this);
 
-        btn = findViewById(R.id.button1);
+        Button btn = findViewById(R.id.button1);
         relativeLayout = findViewById(R.id.container);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isChanged = !isChanged;
-                if (isChanged) {
-                    relativeLayout.setBackground(AppUtils.getDrawable(R.drawable.photo6));
-                } else {
-                    relativeLayout.setBackground(AppUtils.getDrawable(R.drawable.photo5));
-                }
+        btn.setOnClickListener(v -> {
+            isChanged = !isChanged;
+            if (isChanged) {
+                relativeLayout.setBackgroundDrawable(AppUtils.getDrawable(R.mipmap.photo6));
+            } else {
+                relativeLayout.setBackgroundDrawable(AppUtils.getDrawable(R.mipmap.photo5));
             }
         });
 
