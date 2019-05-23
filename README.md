@@ -12,3 +12,9 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
 
 ## 效果演示
+<div align="center">    
+<!--   <img src="https://javer.oss-cn-shanghai.aliyuncs.com/2019/DoraemonKitHome.jpg" width = "300" height = "565" alt="DoKit 首页效果演示" align=center /> -->
+  <video>
+      <source id="webm" src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android9.0.webm" type="video/webm">
+  </video>
+</div>
