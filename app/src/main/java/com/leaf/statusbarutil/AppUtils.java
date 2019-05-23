@@ -9,6 +9,8 @@ import android.os.Looper;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.StringRes;
 
+import java.util.Locale;
+
 /**
  * @author：created by leaf on 2019-05-08
  * Github地址：https://github.com/Ye-Miao
@@ -69,4 +71,42 @@ public class AppUtils {
     public static void runOnUIDelayed(Runnable r, long delayMills) {
         sHandler.postDelayed(r, delayMills);
     }
+
+
+    /**
+     * 获取当前手机系统语言。
+     *
+     * @return 返回当前系统语言。例如：当前设置的是“中文-中国”，则返回“zh-CN”
+     */
+    public static String getSystemLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
+    /**
+     * 获取当前手机系统版本号
+     *
+     * @return  系统版本号
+     */
+    public static String getSystemVersion() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    /**
+     * 获取手机型号
+     *
+     * @return  手机型号
+     */
+    public static String getSystemModel() {
+        return android.os.Build.MODEL;
+    }
+
+    /**
+     * 获取手机厂商
+     *
+     * @return  手机厂商
+     */
+    public static String getDeviceBrand() {
+        return android.os.Build.BRAND;
+    }
+
 }
