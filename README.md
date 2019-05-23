@@ -13,8 +13,6 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 
 ## 效果演示
 <div align="center">    
-<!--   <img src="https://javer.oss-cn-shanghai.aliyuncs.com/2019/DoraemonKitHome.jpg" width = "300" height = "565" alt="DoKit 首页效果演示" align=center /> -->
-  <video>
-      <source id="webm" src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android9.0.webm" type="video/webm">
-  </video>
-</div>
+|Android-9.0| Android-4.4 |
+|：---：|：---：|
+|![](https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/android9.0.mp4)|![](https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/android4.4.mp4)|
