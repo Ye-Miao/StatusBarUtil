@@ -1,5 +1,6 @@
 <p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"/></p>
 
+## 简单总结
 A status bar adaptation scheme for Android4.4-10.0 models that provides modified color, gradient, and immersive experience
 
 适用于Android4.4-10.0机型的状态栏适配方案，可提供修改后的色彩，渐变和沉浸式体验
@@ -9,3 +10,5 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 [![GitHub forks](https://img.shields.io/github/forks/Ye-Miao/StatusBarUtil.svg)]()
 [![GitHub issues](https://img.shields.io/github/issues/Ye-Miao/StatusBarUtil.svg)]()
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
+
+## 效果演示
