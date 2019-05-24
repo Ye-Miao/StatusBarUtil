@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 
 import java.util.Locale;
 
@@ -45,11 +46,11 @@ public class AppUtils {
     }
 
     public static Drawable getDrawable(int resId) {
-        return mContext.getResources().getDrawable(resId);
+        return ContextCompat.getDrawable(mContext, resId);
     }
 
     public static int getColor(int resId) {
-        return mContext.getResources().getColor(resId);
+        return ContextCompat.getColor(mContext, resId);
     }
 
     public static String getString(@StringRes int resId) {
@@ -85,7 +86,7 @@ public class AppUtils {
     /**
      * 获取当前手机系统版本号
      *
-     * @return  系统版本号
+     * @return 系统版本号
      */
     public static String getSystemVersion() {
         return android.os.Build.VERSION.RELEASE;
@@ -94,7 +95,7 @@ public class AppUtils {
     /**
      * 获取手机型号
      *
-     * @return  手机型号
+     * @return 手机型号
      */
     public static String getSystemModel() {
         return android.os.Build.MODEL;
@@ -103,7 +104,7 @@ public class AppUtils {
     /**
      * 获取手机厂商
      *
-     * @return  手机厂商
+     * @return 手机厂商
      */
     public static String getDeviceBrand() {
         return android.os.Build.BRAND;

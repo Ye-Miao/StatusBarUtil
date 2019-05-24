@@ -32,9 +32,9 @@ public class TransparentActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             isChanged = !isChanged;
             if (isChanged) {
-                relativeLayout.setBackgroundDrawable(AppUtils.getDrawable(R.mipmap.photo6));
+                relativeLayout.setBackground(AppUtils.getDrawable(R.mipmap.photo6));
             } else {
-                relativeLayout.setBackgroundDrawable(AppUtils.getDrawable(R.mipmap.photo5));
+                relativeLayout.setBackground(AppUtils.getDrawable(R.mipmap.photo5));
             }
         });
 
