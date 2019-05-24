@@ -10,9 +10,9 @@ gen/
 build/
 
 # gradle
-.gradle/
+#.gradle/
 gradle-app.setting
-!gradle-wrapper.jar
+#!gradle-wrapper.jar
 build/
 
 local.properties
@@ -31,3 +31,5 @@ local.properties
 *~
 .DS_Store
 gradle.properties
+library/libs/
+library/src/main/res/drawable/
