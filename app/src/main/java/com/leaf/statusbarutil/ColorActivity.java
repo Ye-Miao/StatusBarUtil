@@ -1,10 +1,12 @@
 package com.leaf.statusbarutil;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -16,6 +18,7 @@ import java.util.Random;
 public class ColorActivity extends AppCompatActivity {
 
     private int mColor;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class ColorActivity extends AppCompatActivity {
 
         Toolbar mToolbar = findViewById(R.id.toolbar);
         Button mChangeColor = findViewById(R.id.change_color);
+        TextView mVersionText = findViewById(R.id.version_text);
 
         StatusBarUtil.setColor(this, AppUtils.getColor(R.color.start_blue));
 
@@ -32,5 +36,11 @@ public class ColorActivity extends AppCompatActivity {
             mToolbar.setBackgroundColor(mColor);
             StatusBarUtil.setColor(ColorActivity.this, mColor);
         });
+
+        mVersionText.setText(
+                "手机厂商：" + AppUtils.getDeviceBrand() + "\n" +
+                        "手机型号：" + AppUtils.getSystemModel() + "\n" +
+                        "Android系统版本号：" + AppUtils.getSystemVersion()
+        );
     }
 }

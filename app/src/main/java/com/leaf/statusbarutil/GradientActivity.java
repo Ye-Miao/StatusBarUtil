@@ -1,5 +1,6 @@
 package com.leaf.statusbarutil;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -21,6 +23,7 @@ public class GradientActivity extends AppCompatActivity {
     private int mStartColor;
     private int mEndColor;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,10 +31,10 @@ public class GradientActivity extends AppCompatActivity {
         setContentView(R.layout.gradient_color);
 
         Toolbar mToolbar = findViewById(R.id.toolbar);
-        Button mSetGradient21 = findViewById(R.id.set_gradient_21);
-        Button mSetGradient19 = findViewById(R.id.set_gradient_19);
+        Button mSetGradient = findViewById(R.id.set_gradient);
+        TextView mVersionText = findViewById(R.id.version_text);
 
-        mSetGradient21.setOnClickListener(v -> {
+        mSetGradient.setOnClickListener(v -> {
             Random random = new Random();
             mStartColor = 0xff000000 | random.nextInt(0xffffff);
             mEndColor = 0xff000000 | random.nextInt(0xffffff);
@@ -42,16 +45,10 @@ public class GradientActivity extends AppCompatActivity {
             StatusBarUtil.setGradientColor(GradientActivity.this, mToolbar);
         });
 
-        mSetGradient19.setOnClickListener(v -> {
-            Random random = new Random();
-            mStartColor = 0xff000000 | random.nextInt(0xffffff);
-            mEndColor = 0xff000000 | random.nextInt(0xffffff);
-            int[] colors = {mStartColor, mEndColor};
-            GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-
-            mToolbar.setBackground(gradientDrawable);
-            StatusBarUtil.setGradientColor(GradientActivity.this, gradientDrawable);
-        });
-
+        mVersionText.setText(
+                "手机厂商：" + AppUtils.getDeviceBrand() + "\n" +
+                        "手机型号：" + AppUtils.getSystemModel() + "\n" +
+                        "Android系统版本号：" + AppUtils.getSystemVersion()
+        );
     }
 }

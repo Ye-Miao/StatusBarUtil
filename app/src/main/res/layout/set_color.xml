@@ -25,4 +25,13 @@
         android:textAllCaps="false"
         android:padding="16dp"
         android:text="@string/set_color"/>
+
+    <TextView
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:textColor="@color/start_blue"/>
 </LinearLayout>

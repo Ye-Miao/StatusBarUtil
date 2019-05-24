@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -59,11 +57,10 @@ public class StatusBarUtil {
     }
 
     /**
-     * 设置状态栏渐变颜色（Android 5.0版本及以上有效）
-     * 无先后顺序调用限制，放心使用
+     * 设置状态栏渐变颜色
      *
-     * @param activity 目标界面
-     * @param view
+     * @param activity 目标activity
+     * @param view     目标View
      */
     public static void setGradientColor(Activity activity, View view) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
@@ -76,38 +73,39 @@ public class StatusBarUtil {
         setPaddingTop(activity, view);
     }
 
-    /**
-     * 设置状态栏渐变颜色（适用于Android4.4版本）
-     * 如果是初次使用setGradientColor()，则可以直接调用5.0版本方法
-     * 如果是先使用setColor()方法，则需要调用此方法
-     *
-     * @param activity
-     * @param drawable
-     */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public static void setGradientColor(Activity activity, Drawable drawable) {
-        setTransparentForWindow(activity);
-        //获取顶级视图
-        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-        //获取顶部的StatusBarView,自定义id
-        View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
-        if (fakeStatusBarView != null) {
-            if (fakeStatusBarView.getVisibility() == View.GONE) {
-                fakeStatusBarView.setVisibility(View.VISIBLE);
-            }
-            //设置顶层颜色
-            fakeStatusBarView.setBackground(drawable);
-        } else {
-            //上述不符合，则创建一个View添加到顶级视图中
-            fakeStatusBarView = new View(activity);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
-            fakeStatusBarView.setLayoutParams(params);
-            fakeStatusBarView.setBackground(drawable);
-            fakeStatusBarView.setId(android.R.id.custom);
-            decorView.addView(fakeStatusBarView);
-        }
-        setRootView(activity, false);
-    }
+//    /**
+//     * 设置状态栏渐变颜色（适用于Android4.4版本）
+//     * 如果是初次使用setGradientColor()，则可以直接调用5.0版本方法
+//     * 如果是先使用setColor()方法，则需要调用此方法
+//     * (已弃用)
+//     * @param activity
+//     * @param drawable
+//     */
+//    @Deprecated
+//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//    public static void setGradientColor(Activity activity, Drawable drawable) {
+//        setTransparentForWindow(activity);
+//        //获取顶级视图
+//        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+//        //获取顶部的StatusBarView,自定义id
+//        View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
+//        if (fakeStatusBarView != null) {
+//            if (fakeStatusBarView.getVisibility() == View.GONE) {
+//                fakeStatusBarView.setVisibility(View.VISIBLE);
+//            }
+//            //设置顶层颜色
+//            fakeStatusBarView.setBackground(drawable);
+//        } else {
+//            //上述不符合，则创建一个View添加到顶级视图中
+//            fakeStatusBarView = new View(activity);
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
+//            fakeStatusBarView.setLayoutParams(params);
+//            fakeStatusBarView.setBackground(drawable);
+//            fakeStatusBarView.setId(android.R.id.custom);
+//            decorView.addView(fakeStatusBarView);
+//        }
+//        setRootView(activity, false);
+//    }
 
 
     /**

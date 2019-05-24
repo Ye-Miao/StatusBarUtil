@@ -16,23 +16,21 @@
 
 
     <Button
-        android:id="@+id/set_gradient_21"
+        android:id="@+id/set_gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="48dp"
         android:padding="16dp"
-        android:text="@string/set_gradient_21"
+        android:text="@string/set_gradient"
         android:textAllCaps="false"/>
 
-
-    <Button
-        android:id="@+id/set_gradient_19"
+    <TextView
+        android:id="@+id/version_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:padding="16dp"
-        android:text="@string/set_gradient_19"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:textColor="@color/start_blue"/>
 </LinearLayout>
