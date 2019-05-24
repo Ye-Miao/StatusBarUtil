@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.Ye-Miao'
+group='com.Ye-Miao.StatusBarUtil'
+version = "1.6.0"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
