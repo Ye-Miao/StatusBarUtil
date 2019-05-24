@@ -10,7 +10,7 @@ gen/
 build/
 
 # gradle
-#.gradle/
+.gradle/
 gradle-app.setting
 #!gradle-wrapper.jar
 build/
@@ -33,3 +33,4 @@ local.properties
 gradle.properties
 library/libs/
 library/src/main/res/drawable/
+.gradle/5.1.1/vcsMetadata-1/
