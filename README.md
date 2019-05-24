@@ -14,4 +14,4 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 ## 机型演示   
 | Android-9.0 | Android-4.4 |
 |:------------|:------------|
-|![](/img/Android-9.0-min.gif)|![](/img/Android-4.4-min.gif) |
+|![](/img/Android-9.0-min.gif){: width="300px" height="300px"}|![](/img/Android-4.4-min.gif){: width="300px" height="300px"}|
