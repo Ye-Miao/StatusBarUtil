@@ -11,10 +11,8 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 [![GitHub issues](https://img.shields.io/github/issues/Ye-Miao/StatusBarUtil.svg)]()
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
 
-## 机型演示   
-| Android-9.0 | Android-4.4 |
-|:------------|:------------|
-|![](/img/Android-9.0-min.gif)|![](/img/Android-4.4-min.gif) |
-
-
-
+## 效果演示  
+<p align="center">
+<img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android9.0.gif" width="320">
+<img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android4.4.gif" width="320">
+</p>
