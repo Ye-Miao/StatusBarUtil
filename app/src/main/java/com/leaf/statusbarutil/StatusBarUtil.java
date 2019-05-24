@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,7 @@ public class StatusBarUtil {
      * @param activity 目标activity
      * @param color    状态栏颜色值
      */
-    public static void setColor(Activity activity, @ColorInt int color) {
+    public static void setColor(@NonNull Activity activity, @ColorInt int color) {
         setColor(activity, color, DEFAULT_ALPHA);
     }
 
@@ -44,7 +45,7 @@ public class StatusBarUtil {
      * @param color    状态栏颜色值
      * @param alpha    状态栏透明度
      */
-    public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
+    public static void setColor(@NonNull Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -62,7 +63,7 @@ public class StatusBarUtil {
      * @param activity 目标activity
      * @param view     目标View
      */
-    public static void setGradientColor(Activity activity, View view) {
+    public static void setGradientColor(@NonNull Activity activity, View view) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
         if (fakeStatusBarView != null) {
@@ -113,7 +114,7 @@ public class StatusBarUtil {
      *
      * @param activity 目标界面
      */
-    public static void setTransparentForWindow(Activity activity) {
+    public static void setTransparentForWindow(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
             activity.getWindow()
@@ -131,7 +132,7 @@ public class StatusBarUtil {
      * @param context 目标Context
      * @param view    需要增高的View
      */
-    public static void setPaddingTop(Context context, View view) {
+    public static void setPaddingTop(Context context, @NonNull View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
             if (lp != null && lp.height > 0 && view.getPaddingTop() == 0) {
@@ -148,7 +149,7 @@ public class StatusBarUtil {
      *
      * @param activity 目标activity
      */
-    public static void setDarkMode(Activity activity) {
+    public static void setDarkMode(@NonNull Activity activity) {
         darkMode(activity.getWindow(), true);
     }
 
@@ -157,7 +158,7 @@ public class StatusBarUtil {
      *
      * @param activity 目标activity
      */
-    public static void setLightMode(Activity activity) {
+    public static void setLightMode(@NonNull Activity activity) {
         darkMode(activity.getWindow(), false);
     }
 
@@ -167,9 +168,8 @@ public class StatusBarUtil {
             setModeForFlyme4(window, dark);
         } else if (isMIUI6()) {
             setModeForMIUI6(window, dark);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            darkModeForM(window, dark);
         }
+        darkModeForM(window, dark);
     }
 
 
@@ -181,13 +181,15 @@ public class StatusBarUtil {
      */
     @RequiresApi(Build.VERSION_CODES.M)
     private static void darkModeForM(Window window, boolean dark) {
-        int systemUiVisibility = window.getDecorView().getSystemUiVisibility();
-        if (dark) {
-            systemUiVisibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        } else {
-            systemUiVisibility &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int systemUiVisibility = window.getDecorView().getSystemUiVisibility();
+            if (dark) {
+                systemUiVisibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                systemUiVisibility &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            window.getDecorView().setSystemUiVisibility(systemUiVisibility);
         }
-        window.getDecorView().setSystemUiVisibility(systemUiVisibility);
     }
 
 
