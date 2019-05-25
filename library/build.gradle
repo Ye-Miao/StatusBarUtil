@@ -109,6 +109,5 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
     }
-//    6b44a88dddbeb511b85e34c9dee7dfea829c299f
 }
 
