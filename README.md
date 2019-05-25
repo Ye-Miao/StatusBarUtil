@@ -22,10 +22,11 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 ## Gradle
 ```
 repositories {
-    jcenter()
+    ...
+    maven { url 'https://www.jitpack.io' }
 }
 
 dependencies {
-   
+    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.4'
 }
 ```
