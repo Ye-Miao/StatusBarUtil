@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.leaf.library.StatusBarUtil;
+
 import java.util.Random;
 
 /**
