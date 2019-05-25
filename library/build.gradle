@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = "1.7.1"
+
+def siteUrl = 'https://github.com/Ye-Miao/StatusBarUtil'
+def gitUrl = 'https://github.com/Ye-Miao/StatusBarUtil.git'
+group = "com.leaf.statusbarutil"
+version = "1.7.2"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -29,16 +33,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:support-v4:' + rootProject.supportLibraryVersion
     implementation 'com.android.support:design:' + rootProject.supportLibraryVersion
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
-def siteUrl = 'https://github.com/Ye-Miao/StatusBarUtil'
-def gitUrl = 'https://github.com/Ye-Miao/StatusBarUtil.git'
-def issueUrl = 'https://github.com/Ye-Miao/StatusBarUtil/issues'
-group = "com.leaf.statusbarutil"
 
 install {
     repositories.mavenInstaller {
@@ -46,8 +46,11 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'Android StatusBar Util'
+                name 'StatusBarutil'
+                description 'android statusbar util '
+                // #CONFIG# // project title
                 url siteUrl
+                // Set your license
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -56,9 +59,12 @@ install {
                 }
                 developers {
                     developer {
-                        id 'leaf' //填写的一些基本信息
-                        name 'Ye-Miao'
+                        id 'leaf'
+                        // #CONFIG# // your user id (you can write your nickname)
+                        name 'ye.miao'
+                        // #CONFIG# // your user name
                         email '15622113269@163.com'
+                        // #CONFIG# // your email
                     }
                 }
                 scm {
@@ -87,7 +93,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
@@ -95,16 +100,15 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
+        userOrg = "leafos"
         repo = "maven"
-        name = "StatusBarUtil"
-        desc = 'Android StatusBar Util'
+        name = "StatusBarutil"
+        // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
-        issueTrackerUrl = issueUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
-        labels = ['android']
         publish = true
-        publicDownloadNumbers = true
     }
+//    6b44a88dddbeb511b85e34c9dee7dfea829c299f
 }
 
