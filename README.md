@@ -12,7 +12,7 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
 
 ## 下载地址
-![Download Link](https://fir.im/scv6)
+<a href="https://fir.im/scv6">Download Link</a>
 
 ## 机型演示   
 | Android-9.0 | Android-4.4 |
