@@ -50,3 +50,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(path: ':library')
 }
+
+def siteUrl = 'https://github.com/laobie/StatusBarUtil'
+def gitUrl = 'https://github.com/laobie/StatusBarUtil.git'
+def issueUrl = 'https://github.com/laobie/StatusBarUtil/issues'
