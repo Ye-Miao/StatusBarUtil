@@ -1,9 +1,7 @@
 <p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"/></p>
 
-## 简单总结
-A status bar adaptation scheme for Android4.4-10.0 models that provides modified color, gradient, and immersive experience
-
-适用于Android4.4-10.0机型的状态栏适配方案，可提供修改后的色彩，渐变和沉浸式体验
+# StatusBarUtil
+Status bar for Android 4.4-10.0 models with improved color, gradient and immersive experience
 
 [![面向Android开发](https://img.shields.io/badge/%E9%9D%A2%E5%90%91-Android%E5%BC%80%E5%8F%91-%232CC159.svg)]()
 [![GitHub stars](https://img.shields.io/github/stars/Ye-Miao/StatusBarUtil.svg)]()
@@ -11,21 +9,93 @@ A status bar adaptation scheme for Android4.4-10.0 models that provides modified
 [![GitHub issues](https://img.shields.io/github/issues/Ye-Miao/StatusBarUtil.svg)]()
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
 
-## 下载地址
-<a href="https://fir.im/scv6">Download Link</a>
+# Sample
+<a href="https://fir.im/scv6">Download Apk</a>
 
-## 机型演示   
+# Phone model demo
 | Android-9.0 | Android-4.4 |
 |:------------|:------------|
 | <img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android-9.0-min.gif" width="75%"/> | <img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/Android-4.4-min.gif" width="75%"/> |
 
-## Gradle
+# Gradle
 ```
 repositories {
-    jcenter()
+    ...
+    maven { url 'https://www.jitpack.io' }
 }
 
 dependencies {
-   
+    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.4'
 }
 ```
+# Usage
+### Set the solid color status bar
+in your layout XML
+```
+<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"/>
+```
+in your activity
+```
+StatusBarUtil.setColor(this, mColor);
+```
+### Set the gradient status bar
+in your layout XML
+```
+<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"/>
+```
+in your activity
+```
+StatusBarUtil.setGradientColor(this, mToolbar);
+```
+### Set the transparent status bar
+in your activity
+```
+StatusBarUtil.setTransparentForWindow(this);
+```
+### Set the status bar bright mode（Applicable to Android6.0 and above）
+in your activity
+```
+StatusBarUtil.setLightMode(this);
+```
+### Set the status bar dark mode (for Android6.0 and above)
+in your activity
+```
+StatusBarUtil.setDarkMode(this);
+```
+### Increase the paddingTop of the View, the added value is the status bar height (specific use can be referenced in the demo)
+#### You can set the toolbar height to expand to the status bar to implement a solid color status bar
+in your layout XML
+```
+<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"/>
+```
+in your activity
+```
+StatusBarUtil.setPaddingTop(this, mToolbar);
+```
+#### You can set the toolbar height to expand the status bar to implement a gradient color status bar
+in your layout XML
+```
+<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/gradient_color"
+```
+in your activity
+```
+StatusBarUtil.setPaddingTop(this, mToolbar);
+```
+
+
