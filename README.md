@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.4'
+    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
 }
 ```
 # Usage
