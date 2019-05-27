@@ -9,6 +9,8 @@ Status bar for Android 4.4-10.0 models with improved color, gradient and immersi
 [![GitHub issues](https://img.shields.io/github/issues/Ye-Miao/StatusBarUtil.svg)]()
 [![GitHub license](https://img.shields.io/github/license/Ye-Miao/StatusBarUtil.svg)]()
 
+<a href="https://juejin.im/post/5ceb791351882545104f4594">中文</a>
+
 # Sample
 <a href="https://fir.im/scv6">Download Apk</a>
 
