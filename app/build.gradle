@@ -11,21 +11,14 @@ android {
         versionCode rootProject.versionCode
         versionName rootProject.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        release {
-            storeFile file("I:/Android/resource/StatusBarUtil/StatusBarUtil.jks")
-            storePassword "leaf123"
-            keyAlias "First"
-            keyPassword "leaf123"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86"
         }
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
