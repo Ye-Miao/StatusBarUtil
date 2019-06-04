@@ -51,7 +51,7 @@ XML布局
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"/>
+        android:background="@drable/gradient_color"/>
 ```
 activity中使用
 ```
