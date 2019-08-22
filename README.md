@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"/></p>
 
 # StatusBarUtil
-Android沉浸式状态栏，支持状态栏渐变色，纯色， 全屏，亮光、暗色模式，适配android 4.4 -10.0机型
+Android沉浸式状态栏，支持状态栏渐变色，纯色， 全屏，亮光、暗色模式，适配android 4.4 -10.0机型，支持刘海屏，滴水屏
 
 [![面向Android开发](https://img.shields.io/badge/%E9%9D%A2%E5%90%91-Android%E5%BC%80%E5%8F%91-%232CC159.svg)]()
 [![GitHub stars](https://img.shields.io/github/stars/Ye-Miao/StatusBarUtil.svg)]()
