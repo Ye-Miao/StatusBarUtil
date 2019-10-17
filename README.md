@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 # 使用方法
-### 设置纯色状态栏
+### 1.设置纯色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
@@ -44,7 +44,7 @@ activity中使用
 ```
 StatusBarUtil.setColor(this, mColor);
 ```
-### 设置渐变色状态栏
+### 2.设置渐变色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
@@ -57,23 +57,28 @@ activity中使用
 ```
 StatusBarUtil.setGradientColor(this, mToolbar);
 ```
-### 设置透明状态栏
+### 3.设置透明状态栏
 activity中使用
 ```
 StatusBarUtil.setTransparentForWindow(this);
 ```
-### 设置亮色状态栏（适用于Android6.0及以上）
+#### 特别注意，如果设置的是白色透明状态栏模式，那么状态栏上方的字体颜色会被覆盖，显示不清楚，只需要再增加一句
+```
+StatusBarUtil.setDarkMode(this);
+```
+
+### 4.设置亮色状态栏,改变状态栏上方的字体颜色（适用于Android6.0及以上）
 activity中使用
 ```
 StatusBarUtil.setLightMode(this);
 ```
-### 设置暗色状态栏（适用于Android6.0及以上）
+### 5.设置暗色状态栏,改变状态栏上方的字体颜色（适用于Android6.0及以上）
 activity中使用
 ```
 StatusBarUtil.setDarkMode(this);
 ```
-### 增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中引用）
-#### 可以将Toolbar高度延伸到状态栏以实现纯色状态栏
+### 5.增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中查看）
+> + 可以将Toolbar高度延伸到状态栏以实现纯色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
@@ -86,7 +91,7 @@ activity中使用
 ```
 StatusBarUtil.setPaddingTop(this, mToolbar);
 ```
-#### 可以将Toolbar高度延伸到状态栏以实现渐变色状态栏
+> + 可以将Toolbar高度延伸到状态栏以实现渐变色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
