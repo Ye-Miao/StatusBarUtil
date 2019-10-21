@@ -77,7 +77,7 @@ activity中使用
 ```
 StatusBarUtil.setDarkMode(this);
 ```
-### 5.增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中查看）
+### 6.增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中查看）
 > + 可以将Toolbar高度延伸到状态栏以实现纯色状态栏
 XML布局
 ```
