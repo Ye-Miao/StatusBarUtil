@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/Ye-Miao/StatusBarUtil/blob/master/img/logo.png"/></p>
 
 # StatusBarUtil
-Android沉浸式状态栏，支持状态栏渐变色，纯色， 全屏，亮光、暗色模式，适配android 4.4 -10.0机型
+Android沉浸式状态栏，支持状态栏渐变色，纯色， 全屏，亮光、暗色模式，适配android 4.4 -10.0机型，支持刘海屏，滴水屏
 
 [![面向Android开发](https://img.shields.io/badge/%E9%9D%A2%E5%90%91-Android%E5%BC%80%E5%8F%91-%232CC159.svg)]()
 [![GitHub stars](https://img.shields.io/github/stars/Ye-Miao/StatusBarUtil.svg)]()
@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 # 使用方法
-### 设置纯色状态栏
+### 1.设置纯色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
@@ -44,36 +44,41 @@ activity中使用
 ```
 StatusBarUtil.setColor(this, mColor);
 ```
-### 设置渐变色状态栏
+### 2.设置渐变色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"/>
+        android:background="@drable/gradient_color"/>
 ```
 activity中使用
 ```
 StatusBarUtil.setGradientColor(this, mToolbar);
 ```
-### 设置透明状态栏
+### 3.设置透明状态栏
 activity中使用
 ```
 StatusBarUtil.setTransparentForWindow(this);
 ```
-### 设置亮色状态栏（适用于Android6.0及以上）
+#### 特别注意，如果设置的是白色透明状态栏模式，那么状态栏上方的字体颜色会被覆盖，显示不清楚，只需要再增加一句
+```
+StatusBarUtil.setDarkMode(this);
+```
+
+### 4.设置亮色状态栏,改变状态栏上方的字体颜色（适用于Android6.0及以上）
 activity中使用
 ```
 StatusBarUtil.setLightMode(this);
 ```
-### 设置暗色状态栏（适用于Android6.0及以上）
+### 5.设置暗色状态栏,改变状态栏上方的字体颜色（适用于Android6.0及以上）
 activity中使用
 ```
 StatusBarUtil.setDarkMode(this);
 ```
-### 增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中引用）
-#### 可以将Toolbar高度延伸到状态栏以实现纯色状态栏
+### 6.增加View的paddingTop，增加的值是状态栏高度（具体用途可以在demo中查看）
+> + 可以将Toolbar高度延伸到状态栏以实现纯色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
@@ -86,7 +91,7 @@ activity中使用
 ```
 StatusBarUtil.setPaddingTop(this, mToolbar);
 ```
-#### 可以将Toolbar高度延伸到状态栏以实现渐变色状态栏
+> + 可以将Toolbar高度延伸到状态栏以实现渐变色状态栏
 XML布局
 ```
 <android.support.v7.widget.Toolbar
