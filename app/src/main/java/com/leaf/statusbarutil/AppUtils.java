@@ -19,12 +19,15 @@ import java.util.Locale;
  */
 public class AppUtils {
 
+    private AppUtils() {
+    }
+
     private static Context mContext;
     private static Thread mUiThread;
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    public static void init(Context context) { //在Application中初始化
+    static void init(Context context) { //在Application中初始化
         mContext = context;
         mUiThread = Thread.currentThread();
     }

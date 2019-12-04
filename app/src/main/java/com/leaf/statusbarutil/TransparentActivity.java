@@ -17,8 +17,6 @@ import com.leaf.library.StatusBarUtil;
  */
 public class TransparentActivity extends AppCompatActivity {
     private boolean isChanged;
-    private RelativeLayout relativeLayout;
-
 
     @Override
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -29,7 +27,7 @@ public class TransparentActivity extends AppCompatActivity {
         StatusBarUtil.setTransparentForWindow(this);
 
         Button btn = findViewById(R.id.button1);
-        relativeLayout = findViewById(R.id.container);
+        RelativeLayout relativeLayout = findViewById(R.id.container);
 
         btn.setOnClickListener(v -> {
             isChanged = !isChanged;

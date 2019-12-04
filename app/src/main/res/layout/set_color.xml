@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,10 +10,10 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/start_blue"
         app:title="@string/app_name"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white" />
 
 
     <Button
@@ -21,17 +21,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:textAllCaps="false"
+        android:layout_marginTop="200dp"
         android:padding="16dp"
-        android:text="@string/set_color"/>
+        android:text="@string/set_color"
+        android:textAllCaps="false" />
+
+    <SeekBar
+        android:id="@+id/mSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/alpha_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="25" />
 
     <TextView
         android:id="@+id/version_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:layout_marginTop="24dp"
         android:layout_gravity="center"
-        android:textColor="@color/start_blue"/>
+        android:layout_marginTop="24dp"
+        android:textAllCaps="false"
+        android:textColor="@color/start_blue" />
 </LinearLayout>

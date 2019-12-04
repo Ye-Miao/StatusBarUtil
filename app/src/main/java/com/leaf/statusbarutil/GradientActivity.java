@@ -24,6 +24,8 @@ public class GradientActivity extends AppCompatActivity {
 
     private int mStartColor;
     private int mEndColor;
+    private Random random;
+    private Toolbar mToolbar;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -32,25 +34,32 @@ public class GradientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gradient_color);
 
-        Toolbar mToolbar = findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         Button mSetGradient = findViewById(R.id.set_gradient);
         TextView mVersionText = findViewById(R.id.version_text);
 
-        mSetGradient.setOnClickListener(v -> {
-            Random random = new Random();
-            mStartColor = 0xff000000 | random.nextInt(0xffffff);
-            mEndColor = 0xff000000 | random.nextInt(0xffffff);
-            int[] colors = {mStartColor, mEndColor};
-            GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+        changeColor();
 
-            mToolbar.setBackground(gradientDrawable);
-            StatusBarUtil.setGradientColor(GradientActivity.this, mToolbar);
+        mSetGradient.setOnClickListener(v -> {
+            changeColor();
         });
 
         mVersionText.setText(
-                "手机厂商：" + AppUtils.getDeviceBrand() + "\n" +
-                        "手机型号：" + AppUtils.getSystemModel() + "\n" +
-                        "Android系统版本号：" + AppUtils.getSystemVersion()
+                "手机厂商" + AppUtils.getDeviceBrand() + "\n" +
+                        "手机型号" + AppUtils.getSystemModel() + "\n" +
+                        "Android系统版本号" + AppUtils.getSystemVersion()
         );
+    }
+
+    @SuppressLint("NewApi")
+    private void changeColor() {
+        random = new Random();
+        mStartColor = 0xff000000 | random.nextInt(0xffffff);
+        mEndColor = 0xff000000 | random.nextInt(0xffffff);
+        int[] colors = {mStartColor, mEndColor};
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+
+        mToolbar.setBackground(gradientDrawable);
+        StatusBarUtil.setGradientColor(GradientActivity.this, mToolbar);
     }
 }

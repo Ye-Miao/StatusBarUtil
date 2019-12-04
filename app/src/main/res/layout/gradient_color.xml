@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -11,8 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/gradient_color"
         app:title="@string/app_name"
-        app:titleTextColor="@color/white"
-        />
+        app:titleTextColor="@color/white" />
 
 
     <Button
@@ -20,17 +19,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="200dp"
         android:padding="16dp"
         android:text="@string/set_gradient"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/version_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:layout_marginTop="24dp"
         android:layout_gravity="center"
-        android:textColor="@color/start_blue"/>
+        android:layout_marginTop="24dp"
+        android:textAllCaps="false"
+        android:textColor="@color/start_blue" />
 </LinearLayout>
