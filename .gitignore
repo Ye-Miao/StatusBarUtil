@@ -1,10 +1,25 @@
+/gradle/wrapper/gradle-wrapper.properties
+##----------Android----------
+# build
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+# build/F
 
+# gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+local.properties
+source_app_android.iml
+galleryfinal/gradle.properties
+
+##----------idea----------
 *.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
+.idea/
+*.ipr
+*.iws
+
