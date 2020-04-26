@@ -32,14 +32,6 @@ dependencies {
 ```
 # 使用方法
 ### 1.设置纯色状态栏
-XML布局
-```
-<android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"/>
-```
 activity中使用
 ```
 StatusBarUtil.setColor(this, mColor);
