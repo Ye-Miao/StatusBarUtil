@@ -15,6 +15,10 @@ gradle-app.setting
 !gradle-wrapper.jar
 local.properties
 
+
+
+
+
 ##----------idea----------
 *.iml
 .idea/
