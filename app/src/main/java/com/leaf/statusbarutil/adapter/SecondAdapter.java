@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.leaf.statusbarutil.R;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class SecondAdapter extends RecyclerView.Adapter<SecondAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivIcon;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ivIcon = itemView.findViewById(R.id.iv_item_icon);
         }

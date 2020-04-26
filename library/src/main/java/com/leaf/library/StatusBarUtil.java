@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
@@ -35,7 +36,8 @@ public class StatusBarUtil {
      * @param color    状态栏颜色值
      */
     public static void setColor(@NonNull Activity activity, @ColorInt int color) {
-        setColor(activity, color, DEFAULT_ALPHA);
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        setColor(activityWeakReference.get(), color, DEFAULT_ALPHA);
     }
 
     /**
@@ -46,14 +48,16 @@ public class StatusBarUtil {
      * @param alpha    状态栏透明度
      */
     public static void setColor(@NonNull Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        Window window = activityWeakReference.get().getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            activity.getWindow().setStatusBarColor(cipherColor(color, alpha));
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(cipherColor(color, alpha));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            setTranslucentView((ViewGroup) activity.getWindow().getDecorView(), color, alpha);
-            setRootView(activity, true);
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            setTranslucentView((ViewGroup) window.getDecorView(), color, alpha);
+            setRootView(activityWeakReference.get(), true);
         }
     }
 
@@ -64,50 +68,16 @@ public class StatusBarUtil {
      * @param view     目标View
      */
     public static void setGradientColor(@NonNull Activity activity, View view) {
-        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        ViewGroup decorView = (ViewGroup) activityWeakReference.get().getWindow().getDecorView();
         View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
         if (fakeStatusBarView != null) {
             decorView.removeView(fakeStatusBarView);
         }
-        setRootView(activity, false);
-        setTransparentForWindow(activity);
-        setPaddingTop(activity, view);
+        setRootView(activityWeakReference.get(), false);
+        setTransparentForWindow(activityWeakReference.get());
+        setPaddingTop(activityWeakReference.get(), view);
     }
-
-//    /**
-//     * 设置状态栏渐变颜色（适用于Android4.4版本）
-//     * 如果是初次使用setGradientColor()，则可以直接调用5.0版本方法
-//     * 如果是先使用setColor()方法，则需要调用此方法
-//     * (已弃用)
-//     * @param activity
-//     * @param drawable
-//     */
-//    @Deprecated
-//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//    public static void setGradientColor(Activity activity, Drawable drawable) {
-//        setTransparentForWindow(activity);
-//        //获取顶级视图
-//        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-//        //获取顶部的StatusBarView,自定义id
-//        View fakeStatusBarView = decorView.findViewById(android.R.id.custom);
-//        if (fakeStatusBarView != null) {
-//            if (fakeStatusBarView.getVisibility() == View.GONE) {
-//                fakeStatusBarView.setVisibility(View.VISIBLE);
-//            }
-//            //设置顶层颜色
-//            fakeStatusBarView.setBackground(drawable);
-//        } else {
-//            //上述不符合，则创建一个View添加到顶级视图中
-//            fakeStatusBarView = new View(activity);
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
-//            fakeStatusBarView.setLayoutParams(params);
-//            fakeStatusBarView.setBackground(drawable);
-//            fakeStatusBarView.setId(android.R.id.custom);
-//            decorView.addView(fakeStatusBarView);
-//        }
-//        setRootView(activity, false);
-//    }
-
 
     /**
      * 设置透明状态栏
@@ -115,14 +85,14 @@ public class StatusBarUtil {
      * @param activity 目标界面
      */
     public static void setTransparentForWindow(@NonNull Activity activity) {
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        Window window = activityWeakReference.get().getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
-            activity.getWindow()
-                    .getDecorView()
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.getDecorView()
                     .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.getWindow()
-                    .setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 
@@ -150,7 +120,8 @@ public class StatusBarUtil {
      * @param activity 目标activity
      */
     public static void setDarkMode(@NonNull Activity activity) {
-        darkMode(activity.getWindow(), true);
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        darkMode(activityWeakReference.get().getWindow(), true);
     }
 
     /**
@@ -159,7 +130,8 @@ public class StatusBarUtil {
      * @param activity 目标activity
      */
     public static void setLightMode(@NonNull Activity activity) {
-        darkMode(activity.getWindow(), false);
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        darkMode(activityWeakReference.get().getWindow(), false);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -320,7 +292,8 @@ public class StatusBarUtil {
      * @param fitSystemWindows 是否预留toolbar的高度
      */
     private static void setRootView(Activity activity, boolean fitSystemWindows) {
-        ViewGroup parent = activity.findViewById(android.R.id.content);
+        WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+        ViewGroup parent = activityWeakReference.get().findViewById(android.R.id.content);
         for (int i = 0, count = parent.getChildCount(); i < count; i++) {
             View childView = parent.getChildAt(i);
             if (childView instanceof ViewGroup) {

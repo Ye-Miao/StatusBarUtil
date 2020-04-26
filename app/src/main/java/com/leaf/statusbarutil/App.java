@@ -2,6 +2,8 @@ package com.leaf.statusbarutil;
 
 import android.app.Application;
 
+import com.leaf.statusbarutil.utils.AppUtils;
+
 /**
  * date: 2018/11/7
  * desc: App主入口

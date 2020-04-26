@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.GradientDrawable;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.utils.AppUtils;
 
 import java.util.Random;
 
@@ -22,9 +24,6 @@ import java.util.Random;
  */
 public class GradientActivity extends AppCompatActivity {
 
-    private int mStartColor;
-    private int mEndColor;
-    private Random random;
     private Toolbar mToolbar;
 
     @SuppressLint("SetTextI18n")
@@ -53,9 +52,9 @@ public class GradientActivity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     private void changeColor() {
-        random = new Random();
-        mStartColor = 0xff000000 | random.nextInt(0xffffff);
-        mEndColor = 0xff000000 | random.nextInt(0xffffff);
+        Random random = new Random();
+        int mStartColor = 0xff000000 | random.nextInt(0xffffff);
+        int mEndColor = 0xff000000 | random.nextInt(0xffffff);
         int[] colors = {mStartColor, mEndColor};
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
 

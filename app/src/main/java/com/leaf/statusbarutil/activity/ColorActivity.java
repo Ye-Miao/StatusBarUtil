@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.utils.AppUtils;
 
 import java.util.Random;
 
@@ -21,7 +23,6 @@ import java.util.Random;
 public class ColorActivity extends AppCompatActivity {
 
     private int mColor;
-    private Random random;
     private Toolbar mToolbar;
 
     @SuppressLint("SetTextI18n")
@@ -38,9 +39,7 @@ public class ColorActivity extends AppCompatActivity {
 
         changeColor();
 
-        mChangeColor.setOnClickListener(v -> {
-            changeColor();
-        });
+        mChangeColor.setOnClickListener(v -> changeColor());
 
         mSeekBar.setMax(255);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -69,7 +68,7 @@ public class ColorActivity extends AppCompatActivity {
     }
 
     public void changeColor() {
-        random = new Random();
+        Random random = new Random();
         mColor = 0xff000000 | random.nextInt(0xffffff);
         mToolbar.setBackgroundColor(mColor);
         StatusBarUtil.setColor(ColorActivity.this, mColor);

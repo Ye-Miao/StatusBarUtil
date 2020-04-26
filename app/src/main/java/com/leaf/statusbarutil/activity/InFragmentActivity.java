@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.fragment.FirstFragment;
+import com.leaf.statusbarutil.fragment.FourthFragment;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.fragment.SecondFragment;
+import com.leaf.statusbarutil.fragment.ThirdFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

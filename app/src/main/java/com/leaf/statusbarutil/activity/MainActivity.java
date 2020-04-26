@@ -1,16 +1,20 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.utils.AppUtils;
 
 
 /**
@@ -21,7 +25,6 @@ import com.leaf.library.StatusBarUtil;
 public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,12 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.adapter.SecondAdapter;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author：created by apple on 2019-11-26
@@ -47,7 +52,10 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView mRecycler = getView().findViewById(R.id.mRecycler);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> Objects.requireNonNull(getActivity()).finish());
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
 
         StaggeredGridLayoutManager staggeredGridLayoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

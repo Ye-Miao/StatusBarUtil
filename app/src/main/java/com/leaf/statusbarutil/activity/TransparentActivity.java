@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.utils.AppUtils;
 
 /**
  * @author：created by leaf on 2019-05-07
