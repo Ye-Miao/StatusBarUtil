@@ -12,7 +12,7 @@ Android沉浸式状态栏，支持状态栏渐变色，纯色， 全屏，亮光
 <a href="/REAMDE_EN.md">English</a>
 
 # Apk
-<a href="https://fir.im/scv6">Download Apk</a>
+<a href="http://d.7short.com/scv6">Download Apk</a>
 
 # 机型演示
 | Android-9.0 | Android-4.4 |
